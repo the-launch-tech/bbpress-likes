@@ -1,0 +1,49 @@
+span.bbp-reply-like {
+  color: $tertiary;
+  background-color: transparent;
+
+  font-weight: 600;
+  font-family: $display;
+
+  margin: 0 0.5rem;
+  padding: 0.1rem 0.3rem;
+
+  cursor: pointer;
+  transition: 0.3s;
+
+  i,
+  svg {
+    position: relative;
+    top: 1px;
+    margin-right: 0.2rem;
+
+    transition: 0.3s;
+  }
+
+  &:hover {
+    color: $primary;
+    background-color: transparentize($tertiary, 0.7);
+
+    i,
+    svg {
+      transform: scale(1.5) translateY(-5px);
+      color: $highlight;
+    }
+  }
+
+  &:active {
+    color: $primary;
+    background-color: transparent;
+
+    i,
+    svg {
+      transform: scale(1.25);
+      transition: 0.3s;
+    }
+  }
+
+  &.btn-liked {
+    color: #fff;
+    background-color: $secondary;
+  }
+}
