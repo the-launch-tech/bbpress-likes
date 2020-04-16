@@ -4,9 +4,7 @@
  * Plugin Name:       BBPress Likes
  * Plugin URI:        https://pennerwebdesign.com
  * Description:       Allows for integrated likes with auth tracking on BBPress replies
- * Version:           1.0.0
- * Requires at least: 5.2
- * Requires PHP:      7.2
+ * Version:           1.1.0
  * Author:            Daniel Griffiths
  * Author URI:        https://pennerwebdesign.com
  * License:           GPL v2 or later

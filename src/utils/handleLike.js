@@ -7,6 +7,8 @@ export default async function handleLike(e, el, topicId, authId) {
   e.preventDefault()
 
   try {
+    el.classList.add('like-pending')
+
     const { authLiked, currentLikes } = await BBPressService.likeReply({
       topicId,
       replyId: el.getAttribute('data-id'),
@@ -24,6 +26,8 @@ export default async function handleLike(e, el, topicId, authId) {
       el.setAttribute('data-count', currentLikes)
       el.setAttribute('data-auth', 'liked')
     }
+
+    el.classList.remove('like-pending')
 
     return el
   } catch (err) {
