@@ -38,23 +38,32 @@ class BBPLikesController extends WP_REST_Controller {
 
   public function getInitialState($request) {
     $topicId = $request['topic_id'];
+    $nicename = $request['nicename'];
     $authId = $request['auth_id'];
     $returnArr = [];
 
-    $replies = new WP_Query([
+    $args = [
       'post_type' => 'reply',
-      'meta_key' => '_bbp_topic_id',
-      'meta_value' => (int)$topicId,
-      'posts_per_page' => -1
-    ]);
+      'posts_per_page' => -1,
+      'fields' => 'ids'
+    ];
 
-    if (!$replies->have_posts()) {
+    if (((int)$topicId === 0 || $topicId === '0') && $nicename) {
+      $user = get_user_by('login', $nicename);
+      $args['author'] = $user->ID;
+    } else if ((int)$topicId > 0) {
+      $args['meta_key'] = '_bbp_topic_id';
+      $args['meta_value'] = (int)$topicId;
+    }
+
+    $replies = get_posts($args);
+
+    if (!$replies) {
       return new WP_Error('no_reply', 'Unable to get replies', ['status' => 500]);
     }
 
-    while ($replies->have_posts()) : $replies->the_post();
+    foreach ($replies as $id) {
       $likes = [];
-      $id = get_the_ID();
       $likeList = get_field('likes', $id);
       if (strlen($likeList) > 0) {
         $likes = array_map('trim', explode(',', $likeList));
@@ -64,7 +73,7 @@ class BBPLikesController extends WP_REST_Controller {
         'authLiked' => in_array($authId, $likes),
         'replyId' => $id
       ];
-    endwhile;
+    }
 
     $response = new WP_REST_Response([
       'replies' => $returnArr
@@ -73,6 +82,7 @@ class BBPLikesController extends WP_REST_Controller {
     $response->set_status(200);
 
     return $response;
+
   }
 
 }

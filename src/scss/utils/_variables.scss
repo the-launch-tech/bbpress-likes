@@ -1,5 +1,20 @@
-$display: 'Osaka'; // 400, Fancy Font
 $highlight: #d3afa3; // Salmon-ish
 $primary: #2d4f51; // Dark Green-Blue
 $secondary: lighten(#2d4f51, 20%); // Mid Green-Blue
 $tertiary: lighten(#2d4f51, 40%); // Lightest Green-Blue
+
+$bgPrimary: #f6f6f6; // Original light pastel tan
+$bgSecondary: #fdfbfa; // Med pastel tan
+$bgTertiary: #fbfbfb; // Darkened pastel tan
+
+$textHighlight: lighten(#2d4f51, 40%); // Dark green blue
+$textMuted: lighten(#2d4f51, 20%); // Dark green blue
+$textNormal: #2d4f51; // Dark green blue
+
+$colorPrimary: #d3afa3; // Salmon-ish
+$colorSecondary: #d4b09a; // Orange-ish
+$colorTertiary: #e2e7ed; // Light Grey
+
+$display: 'Osaka'; // 400
+$displayAlt: 'Osaka Outline Offset'; // 400
+$base: 'Montserrat'; // 200, 400, 600

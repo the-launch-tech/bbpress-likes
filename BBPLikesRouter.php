@@ -36,7 +36,7 @@ class BBPLikesRouter extends WP_REST_Controller {
   public function getInitialStateRoute() {
     register_rest_route(
       self::NAMESPACE,
-      '/topics/(?P<topic_id>\d+)/replies/all/auth/(?P<auth_id>\d+)',
+      '/topics/(?P<topic_id>\d+)/replies/all/auth/(?P<auth_id>\d+)/(?P<nicename>[\a-zA-Zd]+)',
       [
         'methods' => WP_REST_Server::READABLE,
         'callback' => 'BBPLikesController::getInitialState',
