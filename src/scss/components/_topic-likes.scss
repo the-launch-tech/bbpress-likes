@@ -1,0 +1,30 @@
+div#bbpress-forums.bbpress-wrapper {
+  position: relative;
+
+  .bbplikes-topic-likes {
+    font-weight: 600;
+    font-family: $display;
+    font-size: 0.9rem;
+    cursor: default;
+    color: $tertiary;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    i {
+      color: $highlight;
+      cursor: default;
+    }
+  }
+}
+
+.bbp-user-page {
+  div#bbpress-forums.bbpress-wrapper {
+    .bbplikes-topic-likes {
+      position: absolute;
+      top: 0;
+      left: unset;
+      right: 0;
+    }
+  }
+}

@@ -55,6 +55,8 @@ div#bbpress-forums.bbpress-wrapper ul.bbp-replies li.bbp-body .bbp-reply-header 
       }
 
       &.like-pending {
+        cursor: default;
+
         @keyframes bounce {
           from {
             transform: translateY(4px);

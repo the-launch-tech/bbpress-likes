@@ -1,37 +1,21 @@
-import 'core-js/stable'
+import 'core-js/modules/es.array.concat'
+import 'core-js/modules/es.array.from'
+import 'core-js/modules/es.array.index-of'
+import 'core-js/modules/es.array.iterator'
+import 'core-js/modules/es.array.map'
+import 'core-js/modules/es.number.to-fixed'
+import 'core-js/modules/es.object.to-string'
+import 'core-js/modules/es.parse-int'
+import 'core-js/modules/es.promise'
+import 'core-js/modules/es.regexp.exec'
+import 'core-js/modules/es.string.iterator'
+import 'core-js/modules/es.string.replace'
+import 'core-js/modules/es.string.split'
+import 'core-js/modules/web.dom-collections.iterator'
 import 'regenerator-runtime/runtime'
-import BBPressService from './services/BBPressService'
-import getTopicId from './helpers/getTopicId'
-import getUserProfileNicename from './helpers/getUserProfileNicename'
-import buttonHtml from './helpers/buttonHtml'
-import handleLike from './utils/handleLike'
-import initializeButtonDom from './utils/initializeButtonDom'
-import insertInitialState from './utils/insertInitialState'
-import './scss/_main.scss'
 
-const { log, error } = console
-
-async function BBPressLikes({ nonce, authId, dom, baseUrl }) {
-  const topicId = getTopicId(dom.topicIdEl)
-  const nicename = getUserProfileNicename()
-
-  const replyHeaders = document.querySelectorAll(dom.replyHeaderEl)
-
-  if (!replyHeaders || !topicId) {
-    return
-  }
-
-  const likeButtons = await Promise.all(initializeButtonDom(replyHeaders, dom, topicId))
-
-  const { replies } = await BBPressService.getInitialState({ topicId, authId, nicename })
-
-  await insertInitialState(replies, dom)
-
-  likeButtons.filter(Boolean).map(button => {
-    button.addEventListener('click', e => handleLike(e, button, topicId, authId))
-  })
-}
+import main from './main'
 
 window.addEventListener('load', e => {
-  BBPressLikes($BBPLikes)
+  return new Promise(res => res(main($BBPLikes)))
 })

@@ -2,12 +2,6 @@
 
 class BBPLikesApp {
 
-  const BBPRESS_WRAPPER = '#bbpress-forums';
-  const BBPRESS_TOPIC_ID_GETTER = '.forums.bbp-replies';
-  const BBPRESS_HEADER = '.bbp-reply-header';
-  const BBPRESS_META = '.bbp-meta';
-  const BBPRESS_LIKE = '.bbp-reply-like';
-
   public static function instance() {
     static $inst = null;
     if ($inst === null) {
@@ -21,8 +15,10 @@ class BBPLikesApp {
     add_action('rest_api_init', function () {
       $Router = new BBPLikesRouter();
       $Router->handleLikeRoute();
-      $Router->getInitialStateRoute();
+      $Router->getRepliesState();
+      $Router->getTopicState();
     });
+    add_shortcode('admin_like_notification_list', 'BBPLikesShortcodes::adminNotificationList');
   }
 
   public function enqueueAssets() {
@@ -34,16 +30,8 @@ class BBPLikesApp {
       'bbpLikes-script-bundle',
       '$BBPLikes',
       [
-        'baseUrl' => get_site_url(),
         'authId' => get_current_user_id(),
         'nonce' => wp_create_nonce('wp_rest'),
-        'dom' => [
-          'forumWrapperEl' => self::BBPRESS_WRAPPER,
-          'topicIdEl' => self::BBPRESS_TOPIC_ID_GETTER,
-          'replyHeaderEl' => self::BBPRESS_HEADER,
-          'replyHeaderMetaEl' => self::BBPRESS_META,
-          'appendedReplyLikeEl' => self::BBPRESS_LIKE,
-        ]
       ]
     );
   }
